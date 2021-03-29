@@ -1,25 +1,18 @@
-import '../css/App.css'
-import RightPart from './Contents'
+import '../css/content.css';
+import '../css/rightPart.css';
+import '../css/leftPart.css';
+import { Link } from "react-router-dom";
 
 
-function App(props) {
+function Content(props) {
   return (
     <div className='principalContainer'>
       <div className='smallContainer'>
         <NavMenu />
-        <Content />
+        <PrincipalContent>
+          {props.children}
+        </PrincipalContent>
       </div>
-    </div>
-  )
-}
-
-function Content(props) {
-
-
-  return (
-    <div className='content'>
-      <LeftPart />
-      <RightPart />
     </div>
   )
 }
@@ -43,13 +36,36 @@ function NavMenu(props) {
   )
 }
 
+function PrincipalContent(props) {
+  return (
+    <div className='content'>
+      <LeftPart />
+      <RightPart>
+        {props.children}
+      </RightPart>
+    </div>
+  )
+}
+
 function LeftPart(props) {
   return (
-    <div className='leftPart'>
+      <div className='leftPart'>
      <List  title='Pharmacie' id='home'>
-        <li><a href='#dash'>DashBoard</a></li>
-        <li><a href='#list'>List Medicament</a></li>
-        <li><a href='#admin'>Administration</a></li>
+        <li>
+          <Link to='/'>DashBoard</Link>
+        </li>
+        <li>
+          <Link to='/listMedicament'>List Medicament</Link>
+        </li>
+        <li>
+          <Link to='/ajout'>Stock</Link>
+        </li>
+        <li>
+          <Link to='/pointDeVente'>point de vente</Link>
+        </li>
+        <li>
+          <Link to='/admin'>Administration</Link>
+        </li>
      </List>
 
      <List  title='Autre'/>
@@ -61,6 +77,8 @@ function LeftPart(props) {
 
      
     </div>
+
+
   )
 }
 
@@ -76,4 +94,20 @@ function List (props) {
   )
 }
 
-export default App
+function RightPart(props) {
+  return (
+    <div className='rightPart'>
+      {props.children}
+    </div>
+  )
+}
+export function Block (props) {
+  return (
+    <div className={props.className}>
+      {props.children}
+    </div>
+  )
+}
+
+
+export default Content
